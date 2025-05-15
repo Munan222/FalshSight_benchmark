@@ -1,0 +1,81 @@
+Dataset:
+    name: 'KTH'
+    # dir: '/home/travail/xiyex/KTH'
+    # dir: '/home/zhounan/Desktop/Fire/STDiffProject/data/KTH_sub'
+    # dir: '/home/zhounan/Desktop/Fire/MyData/LiDa2KTH'
+    dir: '/home/zhounan/Desktop/Fire/MyData/LiDa2KTH_10202frames_128_1per4'
+    # dir: '/home/zhounan/Desktop/Fire/MyData/LiDa2KTH_10202frames_128'
+    # dir: '/home/zhounan/Desktop/Fire/MyData/Infrared_128_1per4'
+    # dir: '/home/zhounan/Desktop/Fire/MyData/15s_128'
+
+
+
+
+    phase: 'deploy'
+    dev_set_size: null
+    # batch_size: 64
+    batch_size: 32
+    # num_workers: 16
+    num_workers: 1
+    num_channels: 3
+    # image_size: 64
+    image_size: 128
+    num_observed_frames: 10
+    num_predict_frames: 10
+    test_num_observed_frames: 10
+    test_num_predict_frames: 20
+    rand_Tp: null
+    rand_predict: False
+    half_fps: False
+
+STDiff:
+    Diffusion:
+        unet_config:
+            # sample_size: 64
+            sample_size: 128
+            
+    DiffNet:
+        MotionEncoder:
+            # image_size: 64
+            image_size: 128
+
+
+TestCfg:
+    # ckpt_path: "/home/travail/xiyex/STDiff_ckpts/kth_sde_64"
+    # ckpt_path: "/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_sde_64"
+    # ckpt_path: '/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_sde_128_2000'
+    ckpt_path: '/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_10202frames_128_1per4'
+    # ckpt_path: '/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_10202frames_128'
+    # ckpt_path: '/home/zhounan/Desktop/Fire/STDiffProject/Infrared_10202frames_128_1per4'
+    # ckpt_path: '/home/zhounan/Desktop/Fire/STDiffProject/Infrared_10202frames_128_1per4_10000' # 10202 1per4
+    # ckpt_path: '/home/zhounan/Desktop/Fire/STDiffProject/15s_128'  # 10202 1per4
+
+
+
+
+    
+
+    # test_results_path: "/home/travail/xiyex/STDiff_ckpts/kth_sde_64/test_ddpm100"
+    # test_results_path: "/home/zhounan/Desktop/Fire/STDiffProject/test_ddpm"
+    # test_results_path: "/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_sde_128_2000/test_ddpm128"
+    test_results_path: "/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_10202frames_128_1per4/test_50000"
+    # test_results_path: "/home/zhounan/Desktop/Fire/STDiffProject/LiDa2kth_10202frames_128/test_ddpm128"
+    # test_results_path: "/home/zhounan/Desktop/Fire/STDiffProject/Infrared_10202frames_128_1per4_10000/test_42000"
+    # test_results_path: "/home/zhounan/Desktop/Fire/STDiffProject/15s_128/test_13000"
+
+
+
+
+    scheduler: 
+        name: 'DDPM' #'DPMMS' or 'DDPM'
+        sample_steps: 100
+
+    fps: 1
+    metrics: ['PSNR', 'SSIM', 'LPIPS', 'InterLPIPS']
+    random_predict:
+        first_pred_sample_num: 10
+        first_pred_parralle_bs: 4
+        sample_num: 10
+        # sample_num: 1
+        fix_init_noise: False
+        
